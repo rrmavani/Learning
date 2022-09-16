@@ -1,7 +1,3 @@
-# Linkedin Learning Course
-## Devops Foundations: Your First Project
-##### by 
-
 * [Create Dockerfile](#create-dockerfile)
 * [Create docker-compose](#create-docker-compose)
 
@@ -12,7 +8,6 @@ MAINTAINER Rushabh Mavani
 
 COPY website /website
 COPY nginx.conf /etc/nginx/nginx.conf
-
 EXPOSE 80
 ```
 Some Commands for docker
@@ -113,4 +108,3 @@ ubuntu@desktop:~/Desktop/ex_files/ExFilesProject/ExerciseFiles/02_03_end$ docker
 [+] Running 2/2
  ⠿ Container 02_03_end_website_1  Removed                                                                                                                                                                0.0s
  ⠿ Network 02_03_end_default      Removed                                      
- ```
