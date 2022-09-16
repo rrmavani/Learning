@@ -106,3 +106,11 @@ website_1  | /docker-entrypoint.sh: Configuration complete; ready for start up
 Visit http://localhost
 
 ![localhost](assets/localhost1.png)
+
+Make website down
+```bash
+ubuntu@desktop:~/Desktop/ex_files/ExFilesProject/ExerciseFiles/02_03_end$ docker compose down
+[+] Running 2/2
+ ⠿ Container 02_03_end_website_1  Removed                                                                                                                                                                0.0s
+ ⠿ Network 02_03_end_default      Removed                                      
+ ```
