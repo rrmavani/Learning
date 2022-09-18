@@ -1,4 +1,7 @@
-### Create folder structure
+* [Create Basic Unit Test File](#Create_Basic_Unit_Test_File)
+* [Modify Docker compose](#Modify_Docker_compose)
+
+## Create Basic Unit Test File
 Go to your code and create test folder structure
 ```bash
 $ mkdir spec
@@ -17,7 +20,7 @@ describe "Example page render unit tests" do
   end
 end
 ```
-Modify Docker compose
+## Modify Docker compose
 ```docker
   unit-tests:
     volumes:
@@ -29,8 +32,8 @@ Modify Docker compose
 <details>
   <summary>Full File</summary>
   docker-compose.yml
-  
-  ```
+
+  ```docker
   version: '3.7'
   services:
     website:
