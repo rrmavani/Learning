@@ -27,22 +27,23 @@ Modify Docker compose
       dockerfile: rspec.dockerfile
 ```
 <details>
-<summary>Full File</summary>
-docker-compose.yml
-```
-version: '3.7'
-services:
-  website:
-    build:
-      context: .
-    ports:
-      - 80:80
-  unit-tests:
-    volumes:
-      - "$pwd:/app"
-    build:
-      context: .
-      dockerfile: rspec.dockerfile
-```
+  <summary>Full File</summary>
+  docker-compose.yml
+  
+  ```
+  version: '3.7'
+  services:
+    website:
+      build:
+        context: .
+      ports:
+        - 80:80
+    unit-tests:
+      volumes:
+        - "$pwd:/app"
+      build:
+        context: .
+        dockerfile: rspec.dockerfile
+  ```
 </details>
 
