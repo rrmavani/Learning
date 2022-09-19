@@ -218,3 +218,158 @@ Finished in 0.00314 seconds (files took 1.13 seconds to load)
 
 Notice the last line `1 example, 0failures`.
 
+## Create test file with Selenium
+We want to test the logo presence.
+To add that test in our test ruby file, follow below steps
+
+1. Right click the logo and click **__inspect__**
+2. Fetch the **class name**
+![class_name](assets/class_name.png)
+
+3. Add below code between `it...do` and `end`
+```ruby
+    visit('/')
+    expect(page.has_selector? '.logo').to be true    
+```
+
+We want to use *selenium* as capybara's browsing capability is very limited.
+
+Required to enable selenium web driver with `Capybara.default_driver = :selenium`
+
+We want to use seperate selenium image/container and disable local brower. add below code
+```ruby
+Capybara.run_server = false # Disable Rack since we are using Selenium.
+Capybara.register_driver :selenium do |app|
+  Capybara::Selenium::Driver.new(
+    app,
+    browser: :remote,
+    url: "http://#{ENV['SELENIUM_HOST']}:#{ENV['SELENIUM_PORT']}/wd/hub",
+    capabilities: Selenium::WebDriver::Remote::Capabilities.chrome(
+      "goog:chromeOptions" => {
+        "args" => [
+          '--no-default-browser-check',
+          '--disable-dev-shm'
+        ]
+      }
+    )
+```
+
+<details>
+  <summary>Full File</summary>
+
+```ruby
+require 'capybara'
+require 'capybara/dsl'
+require 'selenium-webdriver'
+
+include Capybara::DSL
+Capybara.app_host = "http://website" # Using Selenium; connect over network
+Capybara.run_server = false # Disable Rack since we are using Selenium.
+Capybara.register_driver :selenium do |app|
+  Capybara::Selenium::Driver.new(
+    app,
+    browser: :remote,
+    url: "http://#{ENV['SELENIUM_HOST']}:#{ENV['SELENIUM_PORT']}/wd/hub",
+    capabilities: Selenium::WebDriver::Remote::Capabilities.chrome(
+      "goog:chromeOptions" => {
+        "args" => [
+          '--no-default-browser-check',
+          '--disable-dev-shm'
+        ]
+      }
+    )
+  )
+end
+Capybara.default_driver = :selenium
+
+describe "Example page render unit tests" do
+  it "Shows the Explore California logo" do
+    visit('/')
+    expect(page.has_selector? '.logo').to be true    
+  end
+end
+```
+</details>
+
+## Modify docker compose file
+We want to run selinium in seperate container
+Add below code for service
+```docker
+  selenium:
+    image: selenium/standalone-chrome-debug
+    ports:
+      - 4444:4444
+      - 5900:5900
+```
+[**standalone-chrome-debug**](https://hub.docker.com/r/selenium/standalone-chrome-debug) come with vnc server installed.<br>
+`4444` port for connecting container on vnc<br>
+`5900` port for vnc<br>
+Start tiger vnc and connect `localhost:4444`.
+
+For unit tests container, add environment variables
+```docker
+    environment:
+      SELENIUM_HOST: selenium
+      SELENIUM_PORT: 4444
+```
+<details>
+  <summary>Full File</summary>
+
+```docker
+version: '3.7'
+services:
+  selenium:
+    image: selenium/standalone-chrome-debug
+    ports:
+      - 4444:4444
+      - 5900:5900
+
+  website:
+    build:
+      context: .
+    ports:
+      - 80:80
+  unit-tests:
+    volumes:
+      - "$PWD:/app"
+    environment:
+      SELENIUM_HOST: selenium
+      SELENIUM_PORT: 4444
+    build:
+      context: .
+      dockerfile: rspec.dockerfile
+    command:
+      - --pattern
+      - /app/spec/unit/*_spec.rb
+```
+
+</details>
+
+Make your selenium image up
+```bash
+ubuntu@desktop:~/Desktop/ex_files/work$ docker-compose up -d --build selenium
+Pulling selenium (selenium/standalone-chrome-debug:)...
+latest: Pulling from selenium/standalone-chrome-debug
+da7391352a9b: Pull complete
+14428a6d4bcd: Pull complete
+2c2d948710f2: Pull complete
+.....<snip>.......
+847edbc2c92a: Pull complete
+3932171e9225: Pull complete
+701dff852387: Pull complete
+Digest: sha256:0c59037d0a095d7edb7b956e95a24573a6a441654a1acd2f7bebad048ef16e65
+Status: Downloaded newer image for selenium/standalone-chrome-debug:latest
+Creating work_selenium_1 ... done
+```
+
+Run your unit-tests
+```bash
+ubuntu@desktop:~/Desktop/ex_files/wubuntu@desktop:~/Desktop/ex_files/work$ docker-compose run --rm unit-tests
+
+Creating work_unit-tests_run ... doincluding Capybara::DSL in the global scope is not recommended!
+.
+
+Finished in 4 seconds (files took 1.46 seconds to load)
+1 example, 0 failures
+```
+Notice ".". It says your test run successful

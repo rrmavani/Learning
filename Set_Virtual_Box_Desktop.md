@@ -7,3 +7,5 @@
   - Install Docker Desktop [1](https://docs.docker.com/desktop/install/ubuntu/#install-docker-desktop)
   - Credeantial Store [1](https://docs.docker.com/desktop/get-started/)
 
+Some other packages required
+* tigervnc
