@@ -1,6 +1,12 @@
 * [Create Basic Unit Test File](#create-basic-unit-test-file)
 * [Create Dockerfile](#create-dockerfile)
 * [Modify Docker compose](#modify-docker-compose)
+* [Start first test](#start-first-test)
+* [Run Basic Test](#run-basic-test)
+* [Create ruby test file with Selenium](#create-ruby-test-file-with-selenium)
+* [Docker compose for Selinium Container](#docker-compose-for-selinium-container)
+* [Make selenium image up](#make-selenium-image-up)
+* [Run unit-tests](#run-unit-tests)
 
 
 ## Create Basic Unit Test File
@@ -218,7 +224,7 @@ Finished in 0.00314 seconds (files took 1.13 seconds to load)
 
 Notice the last line `1 example, 0failures`.
 
-## Create test file with Selenium
+## Create ruby test file with Selenium
 We want to test the logo presence.
 To add that test in our test ruby file, follow below steps
 
@@ -291,7 +297,7 @@ end
 ```
 </details>
 
-## Modify docker compose file
+## Docker compose for Selinium Container
 We want to run selinium in seperate container
 Add below code for service
 ```docker
@@ -345,7 +351,7 @@ services:
 
 </details>
 
-Make your selenium image up
+## Make selenium image up
 ```bash
 ubuntu@desktop:~/Desktop/ex_files/work$ docker-compose up -d --build selenium
 Pulling selenium (selenium/standalone-chrome-debug:)...
@@ -362,7 +368,7 @@ Status: Downloaded newer image for selenium/standalone-chrome-debug:latest
 Creating work_selenium_1 ... done
 ```
 
-Run your unit-tests
+## Run unit-tests
 ```bash
 ubuntu@desktop:~/Desktop/ex_files/wubuntu@desktop:~/Desktop/ex_files/work$ docker-compose run --rm unit-tests
 
@@ -372,4 +378,4 @@ Creating work_unit-tests_run ... doincluding Capybara::DSL in the global scope i
 Finished in 4 seconds (files took 1.46 seconds to load)
 1 example, 0 failures
 ```
-Notice ".". It says your test run successful
+Notice ".". It says our test run successful
