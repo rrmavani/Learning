@@ -1,8 +1,13 @@
 ### Docker
 - List Images : `docker images`
-- List all containers : `docer ps -a`
+- List all containers : `docker ps -a`
+- Remove containers : `docker rm <id>`
+- Remove image : `docker rmi <image name>`
+- Run interective mode with overiding entry point : `docker run --rm -it --entrypoint /bin/sh <image name>`
 
 ### Docker Compose
-- Run specific image : ` docker-compose up -d --build website`
+- Run specific image : `docker-compose up -d --build website`
 - Remove container after execution : `docker-compose run --rm --build unit-tests`
 - Validate and view compose file : `docker-compose config`
+- Just build an image : `docker-compose build <service name>`
+- 

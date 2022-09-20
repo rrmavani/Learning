@@ -370,7 +370,7 @@ Creating work_selenium_1 ... done
 
 ## Run unit-tests
 ```bash
-ubuntu@desktop:~/Desktop/ex_files/wubuntu@desktop:~/Desktop/ex_files/work$ docker-compose run --rm unit-tests
+ubuntu@desktop:~/Desktop/ex_files/work$ docker-compose run --rm unit-tests
 
 Creating work_unit-tests_run ... doincluding Capybara::DSL in the global scope is not recommended!
 .
