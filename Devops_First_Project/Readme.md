@@ -12,3 +12,4 @@
     - Run test `docker-compose run --rm unit-tests`
 
 - [Run terraform in Docker](terraform_in_docker.md)
+- [Create S3 bucket](Create_s3_bucket.md)

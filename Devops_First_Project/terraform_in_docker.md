@@ -20,6 +20,10 @@ ENTRYPOINT [ "/terraform" ]
     build:
       context: .
       dockerfile: terraform.dockerfile
+    volumes:
+      - "$PWD:/app"
+    working_dir: /app
+    env_file: .env
 ```
 <br>
 
