@@ -10,4 +10,11 @@
 - Remove container after execution : `docker-compose run --rm --build unit-tests`
 - Validate and view compose file : `docker-compose config`
 - Just build an image : `docker-compose build <service name>`
-- 
+- Distroy : `docker-compose distory`
+
+### Terraform
+- Initialize : `terraform init`
+- View plan : `terraform plan`
+- Apply : `terraform apply`
+- View cashed output : `terraform output`
+

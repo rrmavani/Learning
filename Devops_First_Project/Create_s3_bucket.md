@@ -64,7 +64,7 @@ resource "aws_s3_bucket_website_configuration" "website" {
   bucket = aws_s3_bucket.website.bucket
 
   index_document {
-    suffix = "index.html"
+    suffix = "index.htm"
   }
 
   error_document {
@@ -330,7 +330,7 @@ Terraform will perform the following actions:
         }
 
       + index_document {
-          + suffix = "index.html"
+          + suffix = "index.htm"
         }
 
       + routing_rule {
@@ -591,7 +591,7 @@ Terraform will perform the following actions:
         }
 
       + index_document {
-          + suffix = "index.html"
+          + suffix = "index.htm"
         }
 
       + routing_rule {

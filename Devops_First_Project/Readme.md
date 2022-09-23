@@ -13,3 +13,4 @@
 
 - [Run terraform in Docker](terraform_in_docker.md)
 - [Create S3 bucket](Create_s3_bucket.md)
+- [Deploy website to S3](deploy_website_S3.md)
