@@ -18,3 +18,8 @@
 - Apply : `terraform apply`
 - View cashed output : `terraform output`
 
+### AWS cli
+- List S3 buckets : `aws s3 ls`
+- List S3 bucket content : `aws s3 ls --recursive s3://melearning.tk`
+- Copy to S3 bucket : `aws s3 cp --recursive website/ s3://melearning.tk`
+- Remove all content : `aws s3 rm s3://melearning.tk --recursive`
