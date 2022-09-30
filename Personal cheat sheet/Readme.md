@@ -51,4 +51,7 @@
 
 <br>
 
-- Port forwaring of node-port service `kubectl port-forward --address 0.0.0.0 service/cloud-lb 8080:8080`
+- Port forwaring `kubectl port-forward --address 0.0.0.0 <object> 3080:80`
+- Above command in background `nohup kubectl port-forward --address 0.0.0.0 <object> 3000:80 > /dev/null 2>&1 &`
+- Connect with POD to execute some commands `kubectl exec -it <podname> -- bash`
+- View logs of a pod `kubectl logs --follow <pod_name>`
